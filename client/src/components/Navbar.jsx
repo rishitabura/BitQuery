@@ -49,7 +49,7 @@ const Navbar = () => {
       </div> */}
 
       {/* CREATE PROFILE BUTTON FOR small devices*/}
-      <div className="sm:flex hidden flex-row justify-end gap-[10px] ">
+      <div className="sm:flex hidden flex-row justify-end gap-[10px]">
         <CustomButton
           btnType="button"
           title={address ? "Create a profile" : "Connect"}
@@ -150,7 +150,7 @@ const Navbar = () => {
             {/* added help button for large devices */}
             <CustomButton
               btnType="button"
-              title={address ? "H" : "Connect"}
+              title={address ? "Help" : "Connect"}
               styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
               handleClick={() => {
                 if (address) navigate("create-campaign");
