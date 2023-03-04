@@ -48,7 +48,7 @@ const Navbar = () => {
         </div>
       </div> */}
 
-      {/* CREATE PROFILE BUTTON FOR small devices*/}
+      {/* CREATE PROFILE BUTTON FOR large devices*/}
       <div className="sm:flex hidden flex-row justify-end gap-[10px]">
         <CustomButton
           btnType="button"
@@ -60,6 +60,7 @@ const Navbar = () => {
           }}
         />
 
+        {/* added help button for large devices */}
         <CustomButton
           btnType="button"
           title={address ? "Help" : "Connect"}
@@ -81,7 +82,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* added help button for small devices*/}
+      {/**/}
       <div className="sm:hidden flex justify-between items-center relative">
         <div className="w-[40px] h-[40px] rounded-[10px] bg-[#2c2f32] flex justify-center items-center cursor-pointer">
           <img
@@ -147,7 +148,7 @@ const Navbar = () => {
               }}
             />
 
-            {/* added help button for large devices */}
+            {/* added help button for small devices */}
             <CustomButton
               btnType="button"
               title={address ? "Help" : "Connect"}
