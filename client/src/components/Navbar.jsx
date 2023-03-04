@@ -2,8 +2,32 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { CustomButton } from "./";
-import { logo, menu, search, thirdweb } from "../assets";
+import { logo, menu, thirdweb, logo_transparent } from "../assets";
+{
+  /* removed search from imports */
+}
 import { navlinks } from "../constants";
+
+const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
+  <div
+    className={`w-[48px] h-[48px] rounded-[10px] ${
+      isActive && isActive == name && "bg-[#2c2f32]"
+    } flex justify-center items-center ${
+      !disabled && "cursor-pointer"
+    } ${styles}`}
+    onClick={handleClick}
+  >
+    {!isActive ? (
+      <img src={imgUrl} alt="fund_logo" className="w-5 h-5" />
+    ) : (
+      <img
+        src={imgUrl}
+        alt="fund_logo"
+        className={`w-5 h-5 ${isActive !== name && "grayscale"}`}
+      />
+    )}
+  </div>
+);
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -14,7 +38,9 @@ const Navbar = () => {
   const address = "0xabc";
 
   return (
-    <div className="flex flex-col-reverse mb-[35px] gap-6 mt-5"> {/* removed md:flex-reverse to align the help and profile button to the right*/}
+    <div className="flex flex-col-reverse mb-[35px] max-h-[100px] gap-6 mt-5">
+      {" "}
+      {/* removed md:flex-reverse to align the help and profile button to the right*/}
       {/* div for logo  */}
       {/* search bar */}
       {/* <div className="lg:flex-1 flex flex-row max-w-[458px] py-2 pl-4 pr-2  h-[52px] bg-[#1c1c24] rounded-[100px]">
@@ -25,7 +51,6 @@ const Navbar = () => {
 
         </div>
       </div> */}
-
       {/* search bar trial*/}
       {/* <div> */}
       {/* <input type="text" placeholder="Search for domains" className="flex  w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none" />
@@ -35,7 +60,6 @@ const Navbar = () => {
 
         </div> */}
       {/* </div> */}
-
       {/* tried to do something but ended up doing nothing */}
       {/* Well the search bar isn't needed here as it is in the center*/}
       {/* <div className=" lg:flex-1 bg-[#1c1c24] rounded-[100px] pb-5">
@@ -47,46 +71,43 @@ const Navbar = () => {
           />
         </div>
       </div> */}
-
       {/* CREATE PROFILE BUTTON FOR large devices*/}
-      <div className="sm:flex hidden flex-row justify-end gap-[10px]">
-        <CustomButton
-          btnType="button"
-          title={address ? "Create a profile" : "Connect"}
-          styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
-          handleClick={() => {
-            if (address) navigate("create-campaign");
-            else "connect()";
-          }}
-        />
-
-        {/* added help button for large devices */}
-        <CustomButton
-          btnType="button"
-          title={address ? "Help" : "Connect"}
-          styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
-          handleClick={() => {
-            if (address) navigate("create-campaign");
-            else "connect()";
-          }}
-        />
-
-        <Link to="/profile">
-          <div className="w-[52px] h-[52px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
-            <img
-              src={thirdweb}
-              alt="user"
-              className="w-[60%] h-[60%] object-contain"
+      <div className="sm:flex flex-row justify-between">
+      <Link to="/">
+            <Icon
+              styles="w-[100px] h-[100px] bg-[#2c2f32]"
+              imgUrl={logo_transparent}
             />
-          </div>
-        </Link>
-      </div>
+          </Link>
+        <div className="sm:flex hidden flex-row justify-end gap-[10px]">
+          <CustomButton
+            btnType="button"
+            title={address ? "Create a profile" : "Connect"}
+            styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
+            handleClick={() => {
+              if (address) navigate("create-campaign");
+              else "connect()";
+            }}
+          />
 
+          {/* added help button for large devices */}
+          <CustomButton
+            btnType="button"
+            title={address ? "Help" : "Connect"}
+            styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
+            handleClick={() => {
+              if (address) navigate("create-campaign");
+              else "connect()";
+            }}
+          />
+
+        </div>
+      </div>
       {/**/}
       <div className="sm:hidden flex justify-between items-center relative">
         <div className="w-[40px] h-[40px] rounded-[10px] bg-[#2c2f32] flex justify-center items-center cursor-pointer">
           <img
-            src={logo}
+            src={logo_transparent}
             alt="user"
             className="w-[60%] h-[60%] object-contain"
           />

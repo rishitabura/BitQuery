@@ -9,7 +9,7 @@ const App = () => {
       <div className="sm:flex hidden mr-10 
       relative">
         {/* removed sidebar */}
-        {/* <Sidebar /> */}   
+        {/* <Sidebar />    */}
       </div>
 
       <p className="">

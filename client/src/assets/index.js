@@ -13,6 +13,7 @@ import money from './money.svg';
 import loader from './loader.svg';
 import thirdweb from './thirdweb.png';
 import homephoto from './homephoto.png';
+import logo_transparent from './logo_transparent.png';
 
 
 export {
@@ -31,4 +32,5 @@ export {
   loader,
   thirdweb,
   homephoto,
+  logo_transparent,
 };

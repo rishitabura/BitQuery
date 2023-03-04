@@ -9,9 +9,9 @@ const Home = () => {
   return (
     <div>
       <div className="flex flex-row justify-center items-center h-[100px] my-50">
-        {" "}
+        
         {/* This search bar is in the center of the homepage */}
-        <div className="lg:flex-1 flex flex-row max-w-[650px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
+        <div className="lg:flex-1 flex flex-row xl:max-w-[1000px] max-w-[650px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
           <input
             type="text"
             placeholder="Search for domains"
