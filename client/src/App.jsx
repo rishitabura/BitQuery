@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route , Routes } from 'react-router-dom';
 
-import { Navbar} from './components';    {/*removed sidebar */}
+import { Navbar, Sidebar} from './components';
 import { CampaignDetails, CreateCampaign, Home, Profile, PostQuestion } from './pages';
 // * Added the PostQuestion page 
 // TODO: Remove the Campaign related pages 
@@ -13,6 +13,7 @@ const App = () => {
       relative">
         {/* removed sidebar */}
         {/* <Sidebar />    */}
+        {/* //TODO: Make sure that the sidebar is visible on all pages except the homepage and the profile page */}
       </div>
 
       <p className="">
