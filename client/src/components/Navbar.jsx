@@ -10,7 +10,7 @@ import { navlinks } from "../constants";
 
 const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
   <div
-    className={`w-[48px] h-[48px] rounded-[10px] ${
+    className={`w-[80px] h-[80px] rounded-[10px] ${
       isActive && isActive == name && "bg-[#2c2f32]"
     } flex justify-center items-center ${
       !disabled && "cursor-pointer"
@@ -18,7 +18,7 @@ const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
     onClick={handleClick}
   >
     {!isActive ? (
-      <img src={imgUrl} alt="fund_logo" className="w-5 h-5" />
+      <img src={imgUrl} alt="fund_logo" className="w-15 h-15" />
     ) : (
       <img
         src={imgUrl}
@@ -36,6 +36,7 @@ const Navbar = () => {
   // const { connect, address } = useStateContext();
 
   const address = "0xabc";
+  // let address; // if we do not give an address, it will change the frontend to show the connect buttons and help buttons
 
   return (
     <div className="flex flex-col-reverse mb-[35px] max-h-[100px] gap-6 mt-5">
@@ -82,10 +83,12 @@ const Navbar = () => {
         <div className="sm:flex hidden flex-row justify-end gap-[10px]">
           <CustomButton
             btnType="button"
-            title={address ? "Create a profile" : "Connect"}
+            title={address ? "Post Question" : "Create profile"} 
+            // {/* If the address is present , it means that the user already has a profile, if there is no address, we prompt the user to connect / create a profile */}
             styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
             handleClick={() => {
-              if (address) navigate("create-campaign");
+              if (address) navigate("post-question");
+              // * Changed navigation from create campaign to post question
               else "connect()";
             }}
           />
@@ -93,10 +96,11 @@ const Navbar = () => {
           {/* added help button for large devices */}
           <CustomButton
             btnType="button"
-            title={address ? "Help" : "Connect"}
+            title={address ? "Help" : "Help"} 
+            // TODO: Have to add a help page for both, if there is an address present as well as if there is no address present.
             styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
             handleClick={() => {
-              if (address) navigate("create-campaign");
+              if (address) navigate("help-address");
               else "connect()";
             }}
           />

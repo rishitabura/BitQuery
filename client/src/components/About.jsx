@@ -33,7 +33,8 @@ const About = () => {
         {/* Added a button in the about page as well*/}
         <CustomButton
               btnType="button"
-              title={address ? "Create a profile" : "Connect"}
+              title={address ? "Post Question" : "Create profile"} 
+              // TODO: Will have to change this button to match the one on navbar, where if there is an address, the button will show the post question on frontend else it will prompt the user to connect
               styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
               handleClick={() => {
                 if (address) navigate("create-campaign");
