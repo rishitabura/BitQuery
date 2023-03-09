@@ -2,13 +2,13 @@ import React from 'react'
 import {Route , Routes } from 'react-router-dom';
 
 import { Navbar, Sidebar} from './components';
-import { CampaignDetails, CreateCampaign, Home, Profile, PostQuestion } from './pages';
+import { CampaignDetails, CreateCampaign, Home, Profile, PostQuestion, UserHome } from './pages';
 // * Added the PostQuestion page 
 // TODO: Remove the Campaign related pages 
 
 const App = () => {
   return (
-    <div className="relative sm:-8 p-4 bg-[#13131a] min-h-screen flex flex-row">
+    <div className="relative sm:-8 p-1 bg-[#13131a] min-h-screen flex flex-row">
       <div className="sm:flex hidden mr-10 
       relative">
         {/* removed sidebar */}
@@ -32,6 +32,7 @@ const App = () => {
           <Route path="/post-question" element={<PostQuestion />} />
           // * Added the post question route
           <Route path="/campaign-details/:id" element={<CampaignDetails />} />
+          <Route path="/user-home" element={<UserHome />} />
 
         </Routes>
       </div>

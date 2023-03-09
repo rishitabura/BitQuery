@@ -36,7 +36,7 @@ const Navbar = () => {
   // const { connect, address } = useStateContext();
 
   const address = "0xabc";
-  // let address; // if we do not give an address, it will change the frontend to show the connect buttons and help buttons
+  // let address; // * if we do not give an address, it will change the frontend to show the connect buttons and help buttons
 
   return (
     <div className="flex flex-col-reverse mb-[35px] max-h-[100px] gap-6 mt-5">
@@ -76,7 +76,7 @@ const Navbar = () => {
       <div className="sm:flex flex-row justify-between">
       <Link to="/">
             <Icon
-              styles="w-[100px] h-[100px] bg-[#2c2f32]"
+              styles="w-[100px] h-[100px]"
               imgUrl={logo_transparent}
             />
           </Link>
@@ -87,7 +87,7 @@ const Navbar = () => {
             // {/* If the address is present , it means that the user already has a profile, if there is no address, we prompt the user to connect / create a profile */}
             styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
             handleClick={() => {
-              if (address) navigate("post-question");
+              if (address) navigate("user-home");
               // * Changed navigation from create campaign to post question
               else "connect()";
             }}
@@ -109,13 +109,14 @@ const Navbar = () => {
       </div>
       {/**/}
       <div className="sm:hidden flex justify-between items-center relative">
-        <div className="w-[40px] h-[40px] rounded-[10px] bg-[#2c2f32] flex justify-center items-center cursor-pointer">
+        {/* <div className="w-[40px] h-[40px] rounded-[10px] bg-[#2c2f32] flex justify-center items-center cursor-pointer">
           <img
             src={logo_transparent}
             alt="user"
             className="w-[60%] h-[60%] object-contain"
           />
-        </div>
+        </div> */}
+        {/* // * Logo for small devices */}
 
         <img
           src={menu}
@@ -165,10 +166,10 @@ const Navbar = () => {
           <div className="flex mx-4">
             <CustomButton
               btnType="button"
-              title={address ? "Create a profile" : "Connect"}
+              title={address ? "Post Question" : "Connect"}
               styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
               handleClick={() => {
-                if (address) navigate("create-campaign");
+                if (address) navigate("user-home");
                 else connect();
               }}
             />
@@ -180,6 +181,7 @@ const Navbar = () => {
               styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
               handleClick={() => {
                 if (address) navigate("create-campaign");
+                // TODO: add help page and support
                 else connect();
               }}
             />
