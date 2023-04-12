@@ -50,4 +50,15 @@ contract BitQuery {
         answer.responder.transfer(payout);
         emit QuestionAccepted(questionId);
     }
+
+    function getQuestions() public view returns (Question[] memory) {
+        Question[] memory allQuestions = new Question[](questionCount);
+
+        for(uint i = 0; i < questionCount; i++) {
+            Question memory item = allQuestions[i];
+
+            allQuestions[i] = item;
+        }
+        return allQuestions;
+    }
 }
