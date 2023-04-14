@@ -27,8 +27,6 @@ contract BitQuery {
 
         Question storage question = questions[questionCount];
 
-        require(msg.value > 0, "Question price must be greater than zero");
-
         question.asker = _asker;
         question.questionText = _questionText;
         question.domain = _domain;
