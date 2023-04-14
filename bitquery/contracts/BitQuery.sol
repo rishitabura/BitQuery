@@ -19,16 +19,25 @@ contract BitQuery {
     mapping(uint256 => Question) public questions;
     mapping(uint256 => Answer) public answers;
     uint256 public questionCount = 0;
-    
-    event NewQuestion(uint256 indexed questionId, address indexed asker, string questionText, string domain, uint256 price);
+
     event NewAnswer(uint256 indexed questionId, address indexed responder, string answerText);
     event QuestionAccepted(uint256 indexed questionId);
     
-    function askQuestion(string memory questionText, string memory domain) public payable {
+    function askQuestion(address payable _asker, string memory _questionText, string memory _domain, uint256 _price) public payable returns (uint256) {
+
+        Question storage question = questions[questionCount];
+
         require(msg.value > 0, "Question price must be greater than zero");
+
+        question.asker = _asker;
+        question.questionText = _questionText;
+        question.domain = _domain;
+        question.price = _price;
+        question.answered = false; // initially false as the question not answered
+
         questionCount++;
-        questions[questionCount] = Question(payable(msg.sender), questionText, domain, msg.value, false);
-        emit NewQuestion(questionCount, msg.sender, questionText, domain, msg.value);
+
+        return questionCount - 1;
     }
     
     function answerQuestion(uint256 questionId, string memory answerText) public {

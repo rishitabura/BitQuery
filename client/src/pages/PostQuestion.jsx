@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ethers } from 'ethers';
+import { ethers, BigNumber } from 'ethers';
 
+import { useStateContext } from '../context';
 import { CustomButton, FormField } from '../components';
 
 const PostQuestion = () => {
     const navigate = useNavigate();
     const [isLoading, setisLoading] = useState(false);
+    const { askQuestion } = useStateContext();
     const [form, setform] = useState({
         domain: '',
         question: '',
@@ -19,8 +21,14 @@ const PostQuestion = () => {
         setform({ ...form, [fieldName]: e.target.value })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setisLoading(true);
+        console.log(ethers.utils.parseUnits(form.amount, 18));
+        await askQuestion({...form, price: ethers.utils.parseUnits(form.amount, 18)});
+        setisLoading(false);
+        navigate('/');
 
         console.log(form);
     };

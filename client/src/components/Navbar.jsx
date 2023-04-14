@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { useStateContext } from "../context";
 import { CustomButton } from "./";
 import { logo, menu, thirdweb, logo_transparent } from "../assets";
+
 {
   /* removed search from imports */
 }
@@ -33,9 +35,9 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("dashboard");
   const [toggleDrawer, setToggleDrawer] = useState(false);
-  // const { connect, address } = useStateContext();
+  const { connect, address } = useStateContext();
 
-  const address = "0xabc";
+  // const address = "0xabc";
   // let address; // * if we do not give an address, it will change the frontend to show the connect buttons and help buttons
 
   return (
@@ -89,7 +91,7 @@ const Navbar = () => {
             handleClick={() => {
               if (address) navigate("user-home");
               // * Changed navigation from create campaign to post question
-              else "connect()";
+              else connect();
             }}
           />
 
@@ -101,7 +103,7 @@ const Navbar = () => {
             styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
             handleClick={() => {
               if (address) navigate("help-address");
-              else "connect()";
+              else connect();
             }}
           />
 
