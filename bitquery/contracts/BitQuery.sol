@@ -62,9 +62,7 @@ contract BitQuery {
         Question[] memory allQuestions = new Question[](questionCount);
 
         for(uint i = 0; i < questionCount; i++) {
-            Question memory item = allQuestions[i];
-
-            allQuestions[i] = item;
+            allQuestions[i] = questions[i];
         }
         return allQuestions;
     }
