@@ -2,7 +2,7 @@
 module.exports = {
   solidity: {
     version: '0.8.9',
-    defaultNetwork: 'sepolia', // switched from goerli to sepolia
+    defaultNetwork: 'goerli', // switched from goerli to sepolia
     networks: {
       hardhat: {},
       goerli: {
