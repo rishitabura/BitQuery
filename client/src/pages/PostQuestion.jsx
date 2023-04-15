@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ethers, BigNumber } from 'ethers';
+import { ethers } from 'ethers';
 
 import { useStateContext } from '../context';
 import { CustomButton, FormField } from '../components';
@@ -12,7 +12,6 @@ const PostQuestion = () => {
     const [form, setform] = useState({
         domain: '',
         question: '',
-        image: '', // optional
         extras: '', // optional
         amount: '', 
     });
@@ -25,7 +24,7 @@ const PostQuestion = () => {
         e.preventDefault();
 
         setisLoading(true);
-        await askQuestion({...form, price: ethers.utils.parseUnits(form.amount, 18)});
+        await askQuestion({...form, amount: ethers.utils.parseUnits(form.amount, 18)});
         setisLoading(false);
         navigate('/user-home');
 
@@ -55,14 +54,14 @@ const PostQuestion = () => {
                 value={form.question}
                 handleChange={(e) => handleFormFieldChange('question', e)}
             />
-            <FormField 
+            {/* Removed the image field */}
+            {/* <FormField 
                 labelName="Image"
                 placeholder="Enter an image here if needed"
-                // {/* // TODO: change the input type from text to a way to accept images from user's devices */}
                 inputType="url" 
                 value={form.image}
                 handleChange={(e) => handleFormFieldChange('image', e)}
-            />  
+            />   */}
             <FormField 
                 labelName="Extras"
                 placeholder="Enter any additional stuff, if needed (E.g. methods already tried/implemented"

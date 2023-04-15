@@ -4,9 +4,10 @@ pragma solidity ^0.8.0;
 contract BitQuery {
     struct Question {
         address payable asker;
-        string questionText;
+        string question;
         string domain;
-        uint256 price;
+        string extras;
+        uint256 amount;
         bool answered;
     }
     
@@ -23,19 +24,18 @@ contract BitQuery {
     event NewAnswer(uint256 indexed questionId, address indexed responder, string answerText);
     event QuestionAccepted(uint256 indexed questionId);
     
-    function askQuestion(address payable _asker, string memory _questionText, string memory _domain, uint256 _price) public payable returns (uint256) {
+    function askQuestion(address payable _asker, string memory _question, string memory _domain,string memory _extras, uint256 _amount) public payable {
 
-        Question storage question = questions[questionCount];
+        Question storage q = questions[questionCount];
 
-        question.asker = _asker;
-        question.questionText = _questionText;
-        question.domain = _domain;
-        question.price = _price;
-        question.answered = false; // initially false as the question not answered
+        q.asker = _asker;
+        q.question = _question;
+        q.domain = _domain;
+        q.amount = _amount;
+        q.extras = _extras;
+        q.answered = false; // initially false as the question not answered
 
         questionCount++;
-
-        return questionCount - 1;
     }
     
     function answerQuestion(uint256 questionId, string memory answerText) public {
@@ -53,7 +53,7 @@ contract BitQuery {
         require(!question.answered, "Question has already been answered");
         answer.accepted = true;
         question.answered = true;
-        uint256 payout = answer.responder.balance + question.price;
+        uint256 payout = answer.responder.balance + question.amount;
         answer.responder.transfer(payout);
         emit QuestionAccepted(questionId);
     }
