@@ -1,11 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useStateContext } from "../context";
 
 import { CustomButton, About, Sidebar } from "../components";
 import { logo, menu, search, thirdweb } from "../assets";
 import { navlinks } from "../constants";
 
 const UserHome = () => {
+
+    const [isLoading, setisLoading] = useState(false);
+    const [questions, setQuestions] = useState([]);
+    const { address, contract, getQuestions } = useStateContext();
+
+    const fetchQuestions = async () => {
+        setisLoading(true);
+        const data = await getQuestions();
+        setQuestions(data);
+        setisLoading(false);
+    }
+
+    useEffect(() => {
+        if(contract) fetchQuestions();
+    }, [address, contract]);
+
     return (
         <div>
         <div className="lg:flex-1 flex flex-row xl:max-w-[1000px] max-w-[650px] mx-auto mt-[50px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">

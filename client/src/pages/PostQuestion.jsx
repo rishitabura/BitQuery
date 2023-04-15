@@ -27,7 +27,7 @@ const PostQuestion = () => {
         setisLoading(true);
         await askQuestion({...form, price: ethers.utils.parseUnits(form.amount, 18)});
         setisLoading(false);
-        navigate('/');
+        navigate('/user-home');
 
         console.log(form);
     };
