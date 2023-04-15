@@ -43,7 +43,7 @@ export const StateContextProvider = ({ children }) => {
             domain: q.domain,
             extras: q.extras,
             amount: ethers.utils.formatEther(q.amount.toString()),
-            pId: i
+            id: i
         }));
 
         console.log("Questions call success", parsedQuestions);

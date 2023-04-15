@@ -1,11 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import QuestionCard from './QuestionCard';
 
 import { loader } from '../assets';
 
 const DisplayQuestions = ({ title, isLoading, questions }) => {
   
   const navigate = useNavigate();
+  const handleNavigate = (q) => {
+    navigate(`/question-details/${q.question}, {state: q}`)
+  }
   
   return (
     <div>
@@ -20,6 +24,13 @@ const DisplayQuestions = ({ title, isLoading, questions }) => {
             No questions created!!
           </p>
         )}
+
+        {!isLoading && questions.length > 0 && questions.map((question) => (
+          <QuestionCard
+            key={question.id}
+            {...question}
+            handleClick={() => handleNavigate(question)}
+          />))}
       </div>
     </div>
   )
