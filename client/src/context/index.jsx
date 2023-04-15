@@ -43,7 +43,7 @@ export const StateContextProvider = ({ children }) => {
             pId: i
         }));
 
-        console.log("Contract call success", parsedQuestions);
+        return parsedQuestions;
     }
 
     return (
