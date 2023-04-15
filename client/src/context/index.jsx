@@ -39,13 +39,14 @@ export const StateContextProvider = ({ children }) => {
 
         const parsedQuestions = questions.map((q, i) => ({
             asker: q.asker,
-            question: q.questionText,
+            question: q.question,
             domain: q.domain,
             extras: q.extras,
             amount: ethers.utils.formatEther(q.amount.toString()),
             pId: i
         }));
 
+        console.log("Questions call success", parsedQuestions);
         return parsedQuestions;
     }
 
