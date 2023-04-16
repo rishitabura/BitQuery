@@ -8,11 +8,11 @@ const DisplayQuestions = ({ title, isLoading, questions }) => {
   
   const navigate = useNavigate();
   const handleNavigate = (q) => {
-    navigate(`/question-details/${q.question}, {state: q}`)
+    navigate(`/question-details/${q.id}, {state: q}`)
   }
   
   return (
-    <div>
+    <div className='mt-[55px] ml-[35px]'>
       <h1 className='font-epilogue font-semibold text-[18px] text-white text-left'>{title} ({questions.length})</h1>
       <div className='flex flex-wrap mt-[20px] gap-[26px]'>
         {isLoading && (

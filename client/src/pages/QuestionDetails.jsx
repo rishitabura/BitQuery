@@ -1,28 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from 'react'
 import { useStateContext } from "../context";
 
 import { DisplayQuestions, Sidebar } from "../components";
 import { search } from "../assets";
 
-const Profile = () => {
-
-    const [isLoading, setisLoading] = useState(false);
-    const [questions, setQuestions] = useState([]);
-    const { address, contract, getUserQuestions } = useStateContext();
-
-    const fetchQuestions = async () => {
-        setisLoading(true);
-        const data = await getUserQuestions();
-        setQuestions(data);
-        setisLoading(false);
-    }
-
-    useEffect(() => {
-        if(contract) fetchQuestions();
-    }, [address, contract]);
-
-    return (
-        <div>
+const QuestionDetails = () => {
+  return (
+    <div>
             <div className="lg:flex-1 flex flex-row xl:max-w-[1000px] max-w-[650px] mx-auto mt-[50px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
                 <input
                     type="text"
@@ -42,13 +26,13 @@ const Profile = () => {
                     <Sidebar />
                 </div>     
                 <DisplayQuestions 
-                    title="Your Questions"
+                    title="All Questions"
                     isLoading={isLoading}
                     questions={questions}
                 />
             </div>
         </div>
-    );
-};
+  )
+}
 
-export default Profile;
+export default QuestionDetails

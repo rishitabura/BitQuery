@@ -50,6 +50,23 @@ export const StateContextProvider = ({ children }) => {
         return parsedQuestions;
     }
 
+    const getUserQuestions = async() => {
+        const allQuestions = await getQuestions();
+
+        const filteredQuestions = allQuestions.filter((question) => question.asker === address);
+
+        return filteredQuestions;
+    }
+
+    // TODO: still have to implement this while searching for domain specific questions
+    const getDomainQuestions = async(dom) => {
+        const allQuestions = await getQuestions();
+
+        const domainQuestions = allQuestions.filter((question) => question.domain === dom);
+
+        return domainQuestions;
+    }  
+
     return (
         <StateContext.Provider
             value={{ 
@@ -57,7 +74,9 @@ export const StateContextProvider = ({ children }) => {
                 contract,
                 connect,
                 askQuestion: getQuestion,
-                getQuestions
+                getQuestions,
+                getUserQuestions,
+                getDomainQuestions
              }}
         >
         {children}
