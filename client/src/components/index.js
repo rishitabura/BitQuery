@@ -5,3 +5,4 @@ export {default as About } from './About';
 export {default as FormField } from './FormField';
 export {default as DisplayQuestions } from './DisplayQuestions';
 export {default as QuestionCard } from './QuestionCard';
+export {default as Loader } from './Loader';
