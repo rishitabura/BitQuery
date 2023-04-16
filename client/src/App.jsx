@@ -2,7 +2,7 @@ import React from 'react'
 import {Route , Routes } from 'react-router-dom';
 
 import { Navbar, Sidebar} from './components';
-import { CampaignDetails, CreateCampaign, Home, Profile, PostQuestion, UserHome } from './pages';
+import { CampaignDetails, CreateCampaign, Home, Profile, PostQuestion, UserHome, QuestionDetails } from './pages';
 // * Added the PostQuestion page 
 // TODO: Remove the Campaign related pages 
 
@@ -33,6 +33,7 @@ const App = () => {
           // * Added the post question route
           <Route path="/campaign-details/:id" element={<CampaignDetails />} />
           <Route path="/user-home" element={<UserHome />} />
+          <Route path="/question-details/:id" element={<QuestionDetails />} />
 
         </Routes>
       </div>

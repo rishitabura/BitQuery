@@ -8,7 +8,7 @@ const DisplayQuestions = ({ title, isLoading, questions }) => {
   
   const navigate = useNavigate();
   const handleNavigate = (q) => {
-    navigate(`/question-details/${q.id}, {state: q}`)
+    navigate(`/question-details/${q.id}`, {state: q})
   }
   
   return (
