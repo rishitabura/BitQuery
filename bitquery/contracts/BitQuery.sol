@@ -13,16 +13,14 @@ contract BitQuery {
     
     struct Answer {
         address payable responder;
-        string answerText;
+        string answer;
         bool accepted;
+        bool rejected;
     }
     
     mapping(uint256 => Question) public questions;
     mapping(uint256 => Answer) public answers;
     uint256 public questionCount = 0;
-
-    event NewAnswer(uint256 indexed questionId, address indexed responder, string answerText);
-    event QuestionAccepted(uint256 indexed questionId);
     
     function askQuestion(address payable _asker, string memory _question, string memory _domain,string memory _extras, uint256 _amount) public payable {
 
@@ -38,24 +36,38 @@ contract BitQuery {
         questionCount++;
     }
     
-    function answerQuestion(uint256 questionId, string memory answerText) public {
-        Question storage question = questions[questionId];
-        require(msg.sender != question.asker, "Asker cannot answer their own question");
-        require(!question.answered, "Question has already been answered");
-        answers[questionId] = Answer(payable(msg.sender), answerText, false);
-        emit NewAnswer(questionId, msg.sender, answerText);
+    function answerQuestion(address payable _responder, uint256 _questionId, string memory _answer) public {
+        Question storage question = questions[_questionId];
+        Answer storage ans = answers[_questionId];
+
+        ans.responder = _responder;
+        ans.answer = _answer;
+        ans.accepted = false;
+        ans.rejected = false;
+        question.answered = true; 
     }
     
-    function acceptAnswer(uint256 questionId) public {
-        Question storage question = questions[questionId];
-        Answer storage answer = answers[questionId];
-        require(msg.sender == question.asker, "Only asker can accept an answer");
-        require(!question.answered, "Question has already been answered");
-        answer.accepted = true;
-        question.answered = true;
-        uint256 payout = answer.responder.balance + question.amount;
-        answer.responder.transfer(payout);
-        emit QuestionAccepted(questionId);
+    function acceptAnswer(uint256 _questionId) public payable {
+        Answer storage answer = answers[_questionId];
+
+        address payable _to = answer.responder;
+
+        uint256 payout = msg.value;
+        (bool sent,) = _to.call{value: payout}("");
+        require(sent, "Failed to send Ether");
+        if(sent){
+            answer.accepted = true;
+            answer.rejected = false;
+        }
+    }
+
+    function rejectAnswer(uint256 _questionId) public {
+        Question storage question = questions[_questionId];
+        Answer storage answer = answers[_questionId];
+
+        question.answered = false;
+        answer.accepted = false;
+        answer.rejected = true;
     }
 
     function getQuestions() public view returns (Question[] memory) {

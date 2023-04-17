@@ -2,7 +2,7 @@
 module.exports = {
   solidity: {
     version: '0.8.9',
-    defaultNetwork: 'goerli', // switched from goerli to sepolia
+    defaultNetwork: 'mumbai', // switched from goerli to mumbai
     networks: {
       hardhat: {},
       goerli: {
@@ -12,6 +12,10 @@ module.exports = {
       sepolia: {
         url: 'https://rpc.ankr.com/eth_sepolia',
         accounts: [`0x${process.env.PRIVATE_KEY}`]       
+      },
+      mumbai: {
+        url: 'https://rpc.ankr.com/polygon_mumbai',
+        accounts: [`0x${process.env.PRIVATE_KEY}`] 
       }
     },
     settings: {
