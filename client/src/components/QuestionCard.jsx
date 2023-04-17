@@ -4,7 +4,7 @@ import { tagType, thirdweb } from '../assets';
 
 const QuestionCard = ({ asker, question, domain, extras, amount, handleClick }) => {
   return (
-    <div className='sm:w-[800px] xl:max-w-[1000px] max-w-[650px] w-full rounded-[15px] bg-[#1c1c24] cursor-pointer' onClick={handleClick}>
+    <div className='sm:w-[800px] xl:max-w-[1000px] max-w-screen w-full rounded-[15px] bg-[#1c1c24] cursor-pointer' onClick={handleClick}>
         <div className='flex flex-col p-4'>
             <div className='flex flex-row items-center mb-[18px]'>
                 <img src={tagType} alt='tag' className='w-[17px] h-[17px] object-contain'/>

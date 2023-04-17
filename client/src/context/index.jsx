@@ -15,8 +15,6 @@ export const StateContextProvider = ({ children }) => {
     const connect = useMetamask();
 
     const getQuestion = async(form) => {
-
-        // TODO: will have to make changes here once contract is updated to hold extra information and price is changed into amount field
         try {
             const data = await askQuestion([
                 address, // asker
@@ -43,6 +41,7 @@ export const StateContextProvider = ({ children }) => {
             domain: q.domain,
             extras: q.extras,
             amount: ethers.utils.formatEther(q.amount.toString()),
+            answered: q.answered,
             id: i
         }));
 
@@ -67,6 +66,12 @@ export const StateContextProvider = ({ children }) => {
         return domainQuestions;
     }  
 
+    const answerQuestion = async(id, answer) => {
+        const data = await contract.call('answerQuestion', id, answer);
+
+        console.log("AnswerQuestion ", id, answer);
+    }
+
     return (
         <StateContext.Provider
             value={{ 
@@ -76,7 +81,8 @@ export const StateContextProvider = ({ children }) => {
                 askQuestion: getQuestion,
                 getQuestions,
                 getUserQuestions,
-                getDomainQuestions
+                getDomainQuestions,
+                answerQuestion
              }}
         >
         {children}
