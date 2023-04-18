@@ -40,12 +40,15 @@ const UserHome = () => {
             <div className="relative sm:-8 p-1 bg-[#13131a] min-h-screen flex flex-row">
                 <div className="sm:flex hidden mr-10 relative">
                     <Sidebar />
+                </div>
+                <div className="flex flex-col">
+                    <DisplayQuestions 
+                        title="All Questions"
+                        isLoading={isLoading}
+                        questions={questions}
+                    />                    
                 </div>     
-                <DisplayQuestions 
-                    title="All Questions"
-                    isLoading={isLoading}
-                    questions={questions}
-                />
+
             </div>
         </div>
     );

@@ -12,6 +12,7 @@ export const StateContextProvider = ({ children }) => {
     
     const { contract } = useContract('0x1C3360A0E93364285D59C0789cBcdDE37a7Db776');
     const { mutateAsync: askQuestion } = useContractWrite(contract, 'askQuestion'); // used to write to contract
+    const { mutateAsync: answerQuestion } = useContractWrite(contract, 'answerQuestion');
 
     const address = useAddress();
     const connect = useMetamask();
@@ -34,8 +35,6 @@ export const StateContextProvider = ({ children }) => {
 
     const getQuestions = async() => {
         const questions = await contract.call('getQuestions');
-
-        // TODO: will have to make changes here once contract is updated to hold extra information and price is changed into amount field
 
         const parsedQuestions = questions.map((q, i) => ({
             asker: q.asker,
@@ -68,10 +67,18 @@ export const StateContextProvider = ({ children }) => {
         return domainQuestions;
     }  
 
-    const answerQuestion = async(id, answer) => {
-        const data = await contract.call('answerQuestion', id, answer);
+    const submitAnswer = async(form) => {
+        try {
+            const data = await answerQuestion([
+                address, //responder
+                form.id, // id of the question
+                form.answer //answer to the question
+            ])
 
-        console.log("AnswerQuestion ", id, answer);
+            console.log("Answer contract call success", data);
+        } catch (error) {
+            console.log("Answer contract call failure", error);
+        }
     }
 
     return (
@@ -84,7 +91,7 @@ export const StateContextProvider = ({ children }) => {
                 getQuestions,
                 getUserQuestions,
                 getDomainQuestions,
-                answerQuestion
+                answerQuestion: submitAnswer
              }}
         >
         {children}

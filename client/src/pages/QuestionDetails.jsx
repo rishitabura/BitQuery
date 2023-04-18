@@ -53,7 +53,7 @@ const QuestionDetails = () => {
                 {!isLoading && !answered && (
                     <div>
                         <AnswerCard 
-                            id={state.id}
+                            qid={state.id}
                         />
                     </div>
                 )}
