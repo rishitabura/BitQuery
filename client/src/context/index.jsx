@@ -10,7 +10,9 @@ export const StateContextProvider = ({ children }) => {
     // const { contract } = useContract('0x9DC09a3053a2D7d6c02B438e12c662a5fd6bCE29'); // working thirdweb contract on Goerli old version
     // const { contract } = useContract('0x252219E75A5014C1dae3Fe0c9801E40A13f59FC5'); // goerli contract address, works for questions but not for answers
     
-    const { contract } = useContract('0x1C3360A0E93364285D59C0789cBcdDE37a7Db776');
+    // const { contract } = useContract('0x1C3360A0E93364285D59C0789cBcdDE37a7Db776'); // working mumbai contract 
+    const { contract } = useContract('0x0c4B3E5cfB242dE2418773cf171C62869E5bFC44'); // working mumbai contract, has get answer function added in 
+    
     const { mutateAsync: askQuestion } = useContractWrite(contract, 'askQuestion'); // used to write to contract
     const { mutateAsync: answerQuestion } = useContractWrite(contract, 'answerQuestion');
 
@@ -35,6 +37,8 @@ export const StateContextProvider = ({ children }) => {
 
     const getQuestions = async() => {
         const questions = await contract.call('getQuestions');
+
+        console.log("Questions", questions);
 
         const parsedQuestions = questions.map((q, i) => ({
             asker: q.asker,
@@ -67,6 +71,25 @@ export const StateContextProvider = ({ children }) => {
         return domainQuestions;
     }  
 
+    // TODO: still have to implement this to get the specific answer to show
+    const getAnswer = async(id) => {
+        const ans = await contract.call('getAnswer', id);
+
+        const parsedAnswer = {
+            responder: ans.responder,
+            answer: ans.answer,
+            accepted: ans.accepted,
+            rejected: ans.rejected,
+            id: id
+        };
+
+        console.log("Answer", ans);
+
+        console.log("parsedAnswer", parsedAnswer);
+
+        return parsedAnswer;
+    }
+
     const submitAnswer = async(form) => {
         try {
             const data = await answerQuestion([
@@ -91,7 +114,8 @@ export const StateContextProvider = ({ children }) => {
                 getQuestions,
                 getUserQuestions,
                 getDomainQuestions,
-                answerQuestion: submitAnswer
+                answerQuestion: submitAnswer,
+                getAnswer
              }}
         >
         {children}

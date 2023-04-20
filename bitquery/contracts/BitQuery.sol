@@ -78,4 +78,10 @@ contract BitQuery {
         }
         return allQuestions;
     }
+
+    function getAnswer(uint256 _questionId) public view returns (Answer memory) {
+        Answer memory answer = answers[_questionId];
+
+        return answer;
+    }
 }

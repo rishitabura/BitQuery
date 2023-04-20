@@ -5,6 +5,7 @@ import { ethers } from 'ethers';
 import { useStateContext } from '../context';
 import FormField from './FormField';
 import CustomButton from './CustomButton';
+import Loader from './Loader';
 
 const AnswerCard = ({ qid }) => {
 
@@ -36,6 +37,7 @@ const AnswerCard = ({ qid }) => {
 
     return (
         <div>
+            {isLoading && <Loader />}
             <p className="mt-[20px] ml-[32px] font-epilogue fount-medium text-[14px] leading-[30px] text-left text-white">
                 Anwser the question...
             </p>

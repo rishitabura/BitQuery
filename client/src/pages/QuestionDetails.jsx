@@ -11,10 +11,23 @@ import { tagType, thirdweb, loader } from '../assets';
 const QuestionDetails = () => {
 
     const { state } = useLocation();
-    const { answerQuestion, contract, address } = useStateContext();
+    const { contract, address, getAnswer } = useStateContext();
     
     const [isLoading, setisLoading] = useState(false);
-    const [amount, setamount] = useState('');
+    const [answer, setanswer] = useState([]);
+
+    const fetchAnswer = async () => {
+        const data = await getAnswer(state.id);
+
+        setanswer(data);
+
+        console.log("fetchAnswer data: ", data);
+    };
+
+    useEffect(() => {
+      if(contract) fetchAnswer();
+    }, [contract, address]);
+    
 
     const answered = state.answered;
 
@@ -46,7 +59,24 @@ const QuestionDetails = () => {
 
                 {!isLoading && answered && (
                     <div>
-                        <p>No answers yet!!</p>
+                        <div>
+                            <p className="mt-[20px] ml-[32px] font-epilogue fount-medium text-[14px] leading-[30px] text-left text-white">
+                                This is the answer to the question.
+                            </p>
+                            <div className="mt-[20px] flex flex-col p-4 bg-[#1c1c24] rounded-[10px]">
+                                <div className='mt-[20px]'>                         
+                                    <p className='ml-[20px] font-epilogue font-normal text-[16px] text-white text-left leading-[26px]'>
+                                        {answer.answer}
+                                    </p>
+                                    <div className='flex items-center mt-[20px] ml-[20px] gap-[12px]'>
+                                        <div className='w-[30px] h-[30px] rounded-full flex justify-center items-center bg-[#13131a]'>
+                                            <img src={thirdweb} alt='user' className='w-1/2 h-1/2 object-contain'/>
+                                        </div>
+                                        <p className='flex-1 font-epilogue font-normal text-[12px] text-[#808191] truncate'>by <span className='text-[#b2b3bd]'>{answer.responder}</span></p>                
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )}
 
