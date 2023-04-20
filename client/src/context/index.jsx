@@ -15,8 +15,6 @@ export const StateContextProvider = ({ children }) => {
     
     const { mutateAsync: askQuestion } = useContractWrite(contract, 'askQuestion'); // used to write to contract
     const { mutateAsync: answerQuestion } = useContractWrite(contract, 'answerQuestion');
-    const { mutateAsync: acceptAnswer } = useContractWrite(contract, 'acceptAnswer');
-    const { mutateAsync: rejectAnswer } = useContractWrite(contract, 'rejectAnswer');
 
     const address = useAddress();
     const connect = useMetamask();
@@ -105,11 +103,10 @@ export const StateContextProvider = ({ children }) => {
         }
     }
 
-    const accept = async(qid) => {
+    const accept = async(qid, qamount) => {
+
         try {
-            const data = await acceptAnswer([
-                qid // id of the question
-            ])
+            const data = await contract.call('acceptAnswer', qid, {value: ethers.utils.parseEther(qamount)});
 
             console.log("Answer accept call success", data);
         } catch (error) {

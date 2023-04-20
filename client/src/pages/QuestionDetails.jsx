@@ -92,6 +92,7 @@ const QuestionDetails = () => {
                     <div>
                         <AcceptanceCard 
                             qid={state.id}
+                            qamount={state.amount}
                         />
                     </div>
                 )}
