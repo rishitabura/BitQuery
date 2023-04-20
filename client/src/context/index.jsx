@@ -15,6 +15,8 @@ export const StateContextProvider = ({ children }) => {
     
     const { mutateAsync: askQuestion } = useContractWrite(contract, 'askQuestion'); // used to write to contract
     const { mutateAsync: answerQuestion } = useContractWrite(contract, 'answerQuestion');
+    const { mutateAsync: acceptAnswer } = useContractWrite(contract, 'acceptAnswer');
+    const { mutateAsync: rejectAnswer } = useContractWrite(contract, 'rejectAnswer');
 
     const address = useAddress();
     const connect = useMetamask();
@@ -71,7 +73,6 @@ export const StateContextProvider = ({ children }) => {
         return domainQuestions;
     }  
 
-    // TODO: still have to implement this to get the specific answer to show
     const getAnswer = async(id) => {
         const ans = await contract.call('getAnswer', id);
 
@@ -104,6 +105,18 @@ export const StateContextProvider = ({ children }) => {
         }
     }
 
+    const accept = async(qid) => {
+        try {
+            const data = await acceptAnswer([
+                qid // id of the question
+            ])
+
+            console.log("Answer accept call success", data);
+        } catch (error) {
+            console.log("Answer accept call failure", error);
+        }
+    }
+
     return (
         <StateContext.Provider
             value={{ 
@@ -115,7 +128,8 @@ export const StateContextProvider = ({ children }) => {
                 getUserQuestions,
                 getDomainQuestions,
                 answerQuestion: submitAnswer,
-                getAnswer
+                getAnswer,
+                acceptAnswer: accept
              }}
         >
         {children}

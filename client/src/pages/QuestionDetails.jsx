@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ethers } from 'ethers';
-import { Sidebar, AnswerCard } from "../components";
+import { AnswerCard, AcceptanceCard } from "../components";
 
 import { useStateContext } from '../context';
 import { tagType, thirdweb, loader } from '../assets';
@@ -28,7 +28,6 @@ const QuestionDetails = () => {
       if(contract) fetchAnswer();
     }, [contract, address]);
     
-
     const answered = state.answered;
 
     return (
@@ -87,7 +86,16 @@ const QuestionDetails = () => {
                         />
                     </div>
                 )}
-            </div>           
+            </div>     
+            <div>
+                {!isLoading && answered && address===state.asker && (
+                    <div>
+                        <AcceptanceCard 
+                            qid={state.id}
+                        />
+                    </div>
+                )}
+            </div>      
         </div>
     );
 }

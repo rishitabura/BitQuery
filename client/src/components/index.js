@@ -7,3 +7,4 @@ export {default as DisplayQuestions } from './DisplayQuestions';
 export {default as QuestionCard } from './QuestionCard';
 export {default as Loader } from './Loader';
 export {default as AnswerCard } from './AnswerCard';
+export {default as AcceptanceCard } from './AcceptanceCard';
