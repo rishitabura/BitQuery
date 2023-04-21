@@ -79,7 +79,7 @@ const QuestionDetails = () => {
                     </div>
                 )}
 
-                {!isLoading && !answered || rejected && (
+                {!isLoading && !answered && (
                     <div>
                         <AnswerCard 
                             qid={state.id}
