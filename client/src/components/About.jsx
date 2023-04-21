@@ -1,11 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useStateContext } from "../context";
+
 import { homephoto } from "../assets";
 import { CustomButton } from './';
 
-
 const About = () => {
 
-  const address = "0xabc";
+  const { address } = useStateContext();
+  const navigate = useNavigate();
 
   return (
 
@@ -34,10 +37,9 @@ const About = () => {
         <CustomButton
               btnType="button"
               title={address ? "Post Question" : "Create profile"} 
-              // TODO: Will have to change this button to match the one on navbar, where if there is an address, the button will show the post question on frontend else it will prompt the user to connect
               styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
               handleClick={() => {
-                if (address) navigate("create-campaign");
+                if (address) navigate('/user-home');
                 else connect();
               }}
             />

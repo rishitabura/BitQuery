@@ -7,7 +7,7 @@ import { useStateContext } from '../context';
 const AcceptanceCard = ({ qid, qamount }) => {
 
     const navigate = useNavigate();
-    const { acceptAnswer } = useStateContext();
+    const { acceptAnswer, rejectAnswer } = useStateContext();
     const [isLoading, setisLoading] = useState(false);
 
     const accept = async () => {
@@ -19,8 +19,17 @@ const AcceptanceCard = ({ qid, qamount }) => {
         navigate('/user-home');
     }
 
+    const reject = async () => {
+        
+        console.log("Rejecting...");
+        setisLoading(true);
+        await rejectAnswer();
+        setisLoading(false);
+        navigate('/user-home');
+    }
     return (
         <div className='mt-[20px] flex flex-row justify-center items-center'>
+            {isLoading && <Loader />}
             <CustomButton 
                 btnType="button"
                 title='Accept Answer'
@@ -31,6 +40,7 @@ const AcceptanceCard = ({ qid, qamount }) => {
                 btnType="button"
                 title='Reject Answer'
                 styles='bg-[#1dc071] px-[30px]'
+                handleClick={reject}
             />
         </div>
     )

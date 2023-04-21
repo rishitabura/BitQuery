@@ -114,6 +114,17 @@ export const StateContextProvider = ({ children }) => {
         }
     }
 
+    const reject = async() => {
+
+        try {
+            const data = await contract.call('rejectAnswer');
+
+            console.log("Answer accept call success", data);
+        } catch (error) {
+            console.log("Answer accept call failure", error);
+        }
+    }
+
     return (
         <StateContext.Provider
             value={{ 
@@ -126,7 +137,8 @@ export const StateContextProvider = ({ children }) => {
                 getDomainQuestions,
                 answerQuestion: submitAnswer,
                 getAnswer,
-                acceptAnswer: accept
+                acceptAnswer: accept,
+                rejectAnswer: reject
              }}
         >
         {children}

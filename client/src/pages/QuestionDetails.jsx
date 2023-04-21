@@ -6,8 +6,6 @@ import { AnswerCard, AcceptanceCard } from "../components";
 import { useStateContext } from '../context';
 import { tagType, thirdweb, loader } from '../assets';
 
-//TODO: Still to implement Loader component on this
-
 const QuestionDetails = () => {
 
     const { state } = useLocation();
@@ -17,8 +15,9 @@ const QuestionDetails = () => {
     const [answer, setanswer] = useState([]);
 
     const fetchAnswer = async () => {
+        setisLoading(true);
         const data = await getAnswer(state.id);
-
+        setisLoading(false);
         setanswer(data);
 
         console.log("fetchAnswer data: ", data);
@@ -29,9 +28,11 @@ const QuestionDetails = () => {
     }, [contract, address]);
     
     const answered = state.answered;
+    const accepted = answer.accepted;
+    const rejected = answer.rejected;
 
     return (
-        <div>  
+        <div> 
             <div className='mt-[20px] flex flex-col p-4 bg-[#1c1c24] rounded-[10px]'>
                 <div className='flex flex-col p-4'>
                     <div className='flex flex-row items-center mb-[18px]'>
@@ -53,9 +54,8 @@ const QuestionDetails = () => {
             </div>   
             <div>
                 {isLoading && (
-                    <img src={loader} alt='loader' className='w-[100px] h-[100px] object-contain'/>
-                )}
-
+                        <img src={loader} alt='loader' className='w-[100px] h-[100px] object-contain'/>
+                )} 
                 {!isLoading && answered && (
                     <div>
                         <div>
@@ -79,7 +79,7 @@ const QuestionDetails = () => {
                     </div>
                 )}
 
-                {!isLoading && !answered && (
+                {!isLoading && !answered || rejected && (
                     <div>
                         <AnswerCard 
                             qid={state.id}
@@ -88,7 +88,7 @@ const QuestionDetails = () => {
                 )}
             </div>     
             <div>
-                {!isLoading && answered && address===state.asker && (
+                {!isLoading && answered && address===state.asker && !accepted && (
                     <div>
                         <AcceptanceCard 
                             qid={state.id}
