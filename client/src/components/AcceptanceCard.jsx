@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import CustomButton from './CustomButton';
+import Loader from './Loader';
 import { useStateContext } from '../context';
 
 const AcceptanceCard = ({ qid, qamount }) => {
