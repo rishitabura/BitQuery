@@ -1,4 +1,4 @@
-import createCampaign from './create-campaign.svg';
+import question from './question.svg';
 import dashboard from './dashboard.svg';
 import logo from './logo.svg';
 import logout from './logout.svg';
@@ -18,7 +18,7 @@ import logo_transparent from './logo_transparent.png';
 
 export {
   tagType,
-  createCampaign,
+  question,
   dashboard,
   logo,
   logout,

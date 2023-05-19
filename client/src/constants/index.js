@@ -1,5 +1,4 @@
-import { createCampaign, dashboard, logout, payment, profile, withdraw } from '../assets';
-// TODO: change import logos if needed
+import { question, dashboard, logout, payment, profile, withdraw } from '../assets';
 
 export const navlinks = [
   {
@@ -9,7 +8,7 @@ export const navlinks = [
   },
   {
     name: 'question',
-    imgUrl: createCampaign, // TODO: change img url if needed
+    imgUrl: question, 
     link: '/post-question',
   },
   {

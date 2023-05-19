@@ -2,9 +2,8 @@ import React from 'react'
 import {Route , Routes } from 'react-router-dom';
 
 import { Navbar, Sidebar} from './components';
-import { CampaignDetails, CreateCampaign, Home, Profile, PostQuestion, UserHome, QuestionDetails } from './pages';
+import {Home, Profile, PostQuestion, UserHome, QuestionDetails } from './pages';
 // * Added the PostQuestion page 
-// TODO: Remove the Campaign related pages 
 
 const App = () => {
   return (
@@ -16,10 +15,6 @@ const App = () => {
         {/* //TODO: Make sure that the sidebar is visible on all pages except the homepage and the profile page */}
       </div>
 
-      <p className="">
-        
-      </p>
-
       <div className="flex-1 max-sm:w-full max-w-
       [1280px] mx-auto sm:pr-5">
         <Navbar />
@@ -27,14 +22,10 @@ const App = () => {
         <Routes>
         <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/create-campaign" element={<CreateCampaign />} />
-          // TODO: Remove the create campaign path as well as the campaign details path
           <Route path="/post-question" element={<PostQuestion />} />
           // * Added the post question route
-          <Route path="/campaign-details/:id" element={<CampaignDetails />} />
           <Route path="/user-home" element={<UserHome />} />
           <Route path="/question-details/:id" element={<QuestionDetails />} />
-
         </Routes>
       </div>
     </div>
