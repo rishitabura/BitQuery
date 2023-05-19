@@ -85,7 +85,7 @@ const Navbar = () => {
         <div className="sm:flex hidden flex-row justify-end gap-[10px]">
           <CustomButton
             btnType="button"
-            title={address ? "Post Question" : "Create profile"} 
+            title={address ? "Post Question" : "Connect Wallet"} 
             // {/* If the address is present , it means that the user already has a profile, if there is no address, we prompt the user to connect / create a profile */}
             styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
             handleClick={() => {

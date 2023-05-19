@@ -26,7 +26,7 @@ export const StateContextProvider = ({ children }) => {
                 form.question, // question
                 form.domain, // domain
                 form.extras, // extras
-                form.amount // price
+                form.amount // amount
             ])         
             
             console.log("Contract call success", data);
