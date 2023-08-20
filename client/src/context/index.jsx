@@ -5,12 +5,6 @@ import { ethers } from 'ethers';
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
-    // const { contract } = useContract('0x8a5744a12E8c733d649823047E3C79fE49e14d4f'); // thirdweb contract address
-    // const { contract } = useContract('0x0c4B3E5cfB242dE2418773cf171C62869E5bFC44'); // thirdweb contract address for no require statement
-    // const { contract } = useContract('0x9DC09a3053a2D7d6c02B438e12c662a5fd6bCE29'); // working thirdweb contract on Goerli old version
-    // const { contract } = useContract('0x252219E75A5014C1dae3Fe0c9801E40A13f59FC5'); // goerli contract address, works for questions but not for answers
-    
-    // const { contract } = useContract('0x1C3360A0E93364285D59C0789cBcdDE37a7Db776'); // working mumbai contract 
     const { contract } = useContract('0x0c4B3E5cfB242dE2418773cf171C62869E5bFC44'); // working mumbai contract, has get answer function added in 
     
     const { mutateAsync: askQuestion } = useContractWrite(contract, 'askQuestion'); // used to write to contract
@@ -26,7 +20,7 @@ export const StateContextProvider = ({ children }) => {
                 form.question, // question
                 form.domain, // domain
                 form.extras, // extras
-                form.amount // price
+                form.amount // amount
             ])         
             
             console.log("Contract call success", data);
