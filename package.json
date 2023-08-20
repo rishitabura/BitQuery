@@ -4,10 +4,10 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-      "dev": "cd client && vite",
-      "build": "cd client && vite build",
-      "preview": "cd client && vite preview",
-      "deploy": "cd client && yarn build && npx thirdweb@latest upload dist"
+      "dev": "cd ../client && vite",
+      "build": "cd ../client && vite build",
+      "preview": "cd ../client && vite preview",
+      "deploy": "cd ../client && yarn build && npx thirdweb@latest upload dist"
     },
     "keywords": [],
     "author": "",
